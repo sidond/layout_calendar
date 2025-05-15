@@ -1,4 +1,6 @@
 $square-size: 100px;
+$last-day-of-month: 31;
+$days: mon, tue, wed, thu, fri, sat, sun;
 
 body {
   margin: 0;
@@ -6,7 +8,7 @@ body {
 
 .calendar {
   display: flex;
-  flex-flow: row-reverse wrap-reverse;
+  flex-flow: row wrap;
   gap: 1px;
   width: 710px;
   font-family: Arial, Helvetica, sans-serif;
@@ -29,8 +31,14 @@ body {
   transition-property: background-color;
 }
 
-@for $i from 1 through 31 {
-  .calendar__day:nth-child(32n - #{$i})::before {
+@each $day in $days {
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    margin-left: calc($day-width * #{index($days, $day) - 1});
+  }
+}
+
+@for $i from 1 through $last-day-of-month {
+  .calendar__day:nth-child(n + #{$i})::before {
     content: '#{$i}';
   }
 }
