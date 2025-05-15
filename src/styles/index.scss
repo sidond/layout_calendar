@@ -32,8 +32,10 @@ body {
 }
 
 @each $day in $days {
-  .calendar--start-day-#{$day} .calendar__day:first-child {
-    margin-left: calc($day-width * #{index($days, $day) - 1});
+  .calendar__day--start-#{$day} {
+    $i: index($days, $day);
+
+    margin-left: calc($square-size * #{$i - 1} + #{$i - 1}px);
   }
 }
 
@@ -47,4 +49,5 @@ body {
   position: relative;
   top: -10px;
   background-color: #ffbfcb;
+  cursor: pointer;
 }
